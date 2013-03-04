@@ -74,7 +74,7 @@ BUILD_DEPENDS="debhelper (>= 7.0.50~),
  python-imaging,
  libplist-dev,
  libhal-storage-dev,
- libcec-dev (>= 1.1),
+ libcec-dev (>= 2.1),
  libudev-dev,
  libafpclient-dev,
  libshairport-dev,
@@ -99,6 +99,12 @@ BUILD_DEPENDS="debhelper (>= 7.0.50~),
 
 case "$1" in
     BUILD_DEPENDS)
+        if [ $(lsb_release -cs) = "precise" ]; then
+          BUILD_DEPENDS="$BUILD_DEPENDS autopoint"
+        fi
+        if [ $(lsb_release -cs) = "raring" ]; then
+          BUILD_DEPENDS="$BUILD_DEPENDS autopoint"
+        fi
         printf "$BUILD_DEPENDS"
         ;;
     XBMC_LIVE_DEPENDS)
